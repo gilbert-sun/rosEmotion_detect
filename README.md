@@ -2,6 +2,15 @@
 # Emotion recognition detecting at ROS Nvidia Tx2
 This is the tensorflow slim model for emotion reconition
 
+Ret1):  表情代號: 0:angry ,1:happy  ,2:neutral ,3:sad ,4:surprise
+
+Ret2):  情緒百分比: %
+
+Ret3):  臉部坐標:  (x, y, w, h) == (46, 202, 127, 127)
+
+```bash
+$ (表情,%百分比,臉部坐標[x,y,w,h] ) == (Happy,0.8253038,[46,202,127,127])
+```
 
 rosEmotion_detecting ....
 =========================
@@ -111,7 +120,19 @@ cat result.log
 
 # Function Input & Output
 
-See python/main.py
+See main1.py
+
+
+
+```
+#Program execution
+python main1.py CVsub:=image_raw
+
+#function output
+(表情,%百分比,臉部坐標[x,y,w,h] ) == (Happy,0.8253038,[46,202,127,127])
+```
+
+See main.py
 
 ```
 #function input
