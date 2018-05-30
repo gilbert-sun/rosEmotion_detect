@@ -18,7 +18,7 @@ class RosTensorFlow():
 
         self.bridge = CvBridge()
 
-        self._sub = rospy.Subscriber('CVsub', Image, self.callback, queue_size=1)
+        self._sub = rospy.Subscriber('CVsub', Image, self.callback, queue_size=1 , buff_size = 52428800)
 
         self._pub = rospy.Publisher('CVpub', Image, queue_size=1)
 
@@ -42,7 +42,7 @@ class RosTensorFlow():
 
         while (True):
             # ret, frame = camera.read()
-
+            print ( "------------2-------------Delay:%6.3f" % (rospy.Time.now()).to_sec() )
             frame = self.bridge.imgmsg_to_cv2(image_msg, "bgr8")
 
 #----------------------------------------------------------------------------# add by gilbert at 2018/04/18
@@ -88,8 +88,8 @@ class RosTensorFlow():
             print(bbox_list)
             print("\n")
 
-            fexpr_list = r.classify_image(image, bbox_list)
-            # fexpr_list = [(2, 0.99), (1,0.98)]
+ #           fexpr_list = r.classify_image(image, bbox_list)
+            fexpr_list = [(2, 0.99), (1,0.98)]
             #
 
             idx =0
@@ -132,7 +132,7 @@ class RosTensorFlow():
                     rospy.loginfo("----------------unkwone  emotion :" + answer1  +"%"+ answer2)
                     self._pub1.publish("unkwone  emotion :" + answer1 +"%" + answer2)
 
-                r.draw_label(imageBody, fexpr, pos, wd, ht)
+                #r.draw_label(imageBody, fexpr, pos, wd, ht)
                 #cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
                 cv2.rectangle(imageBody, (xx, yy), (xx + wd, yy + ht), (0, 0, 255), 2)
 
@@ -141,11 +141,13 @@ class RosTensorFlow():
             cv2.imwrite("body.jpg", imageBody)
             msg = self.bridge.cv2_to_imgmsg(imageBody, "bgr8")
 #----------------------------------------------------------------------------# add by gilbert at 2018/04/18 ENd...            
+            msg.header.stamp = rospy.Time.now()
+            print ( "------------1-------------Delay:%6.3f" % (msg.header.stamp).to_sec() )
             self._pub.publish(msg)
-            k = cv2.waitKey(30) & 0xff
-            k = True
-            if k == 27 or k == True:
-                break
+            #k = cv2.waitKey(30) & 0xff
+            #k = True
+            #if k == 27 or k == True:
+            break
         # camera.release()
         cv2.destroyAllWindows()
 
