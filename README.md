@@ -118,6 +118,8 @@ $ python main1.py CVsub:=image_raw
 ```
 new version
 ***
+$ cd /root/catkin_ws/
+$ catkin_make 
 $ source /root/catkin_ws/devel/setup.bash
 $ roscore
 $ roslaunch usb_cam usb_cam-test.launch

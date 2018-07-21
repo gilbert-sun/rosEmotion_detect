@@ -56,7 +56,7 @@ class EmotionClassifier():
             init_fn(self.sess)
 
 
-
+emoC0 = EmotionClassifier()
 
 class RosEmotion():
     
@@ -72,7 +72,7 @@ class RosEmotion():
 
 		self._pub1 = rospy.Publisher('result', String, queue_size=1)
  
-		self.emoC1 = EmotionClassifier()
+		self.emoC1 = emoC0
             
 		#bridge = CvBridge()
 		print("------Initial Entry Point of Emotion Detecting , Starting now ......")
@@ -146,6 +146,6 @@ class RosEmotion():
 if __name__ == '__main__':
 	rosEmo1 = RosEmotion()
 
-	rosEmo1.__init__()
+	#rosEmo1.__init__()
  
 	rosEmo1.main()
