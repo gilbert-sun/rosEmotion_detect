@@ -23,6 +23,18 @@ python python/main.py
 cat result.log
 ```
 
+# Daily update
+```
+#daily 23:02 to call client_faceType_emotion.py to upload data to amibo
+crontab -e
+2 23 * * *  python  /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.py >> /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.log 2>&1
+```
+```
+#modify jsonPath.txt
+to specify your json path in this otherwise daily upload function will not upload
+
+```
+
 # Function Input & Output
 
 See python/main.py
