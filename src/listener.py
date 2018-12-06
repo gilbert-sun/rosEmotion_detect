@@ -19,8 +19,14 @@ from nets import resnet_v2
 from preprocessing import inception_preprocessing
 import time
 
-
-
+#----------------20181129-------------------------------------------------------------------------------
+# adding  report file in term of the statistic of face type at local
+# crontab -e: *-2 * * * *   -bin-sh -media-nvidia-OS_Install-pyfacV3-repodayFaceTypeEmotion.sh >> test.log
+# repodayFaceTypeEmotion.sh : python client_faceType_emotion.py >> client_faceType_emotion.log 2>&1
+from clientFlask1 import write_json_file,face_RepoFormat
+import datetime , os
+from time import time
+#----------------20181129-------------------------------------------------------------------------------
 
 bbox_list = []
 
@@ -56,10 +62,11 @@ class EmotionClassifier():
             init_fn(self.sess)
 
 
+
 emoC0 = EmotionClassifier()
 
 class RosEmotion():
-    
+
     def __init__(self):
 
 		self.bridge = CvBridge()
@@ -72,11 +79,17 @@ class RosEmotion():
 
 		self._pub1 = rospy.Publisher('result', String, queue_size=1)
  
-		self.emoC1 = emoC0
+		self.emoC1 = emoC0 #EmotionClassifier()
             
 		#bridge = CvBridge()
 		print("------Initial Entry Point of Emotion Detecting , Starting now ......")
 
+#----------------20181129-------------------------------------------------------------------------------
+# adding  report file in term of the statistic of face type at local
+		self.newTime = 0
+		self.oldTime = int(time()) 
+		print ("......", self.oldTime)
+#----------------20181129-------------------------------------------------------------------------------
  
     def callback(self, imgmsg):
 		face_cascade = cv2.CascadeClassifier('./cascades/haarcascade_frontalface_alt.xml')
@@ -129,12 +142,23 @@ class RosEmotion():
 				#cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)
 				cv2.rectangle(frame, pos , (xx + wd, yy + ht), (0, 0, 255), 2)
 
-	 
+#----------------20181129-------------------------------------------------------------------------------
+# adding  report file in term of the statistic of face type at local
+# crontab -e 
+				self.newTime = int(time())
+				if(  self.newTime - self.oldTime > 60 ):
+				    ans1 =  float(answer1) 
+ 				    ans1 = int (ans1*100) 
+				    write_json_file('client_faceType_emotion.json', face_RepoFormat(answer, ans1) )  
+				    self.oldTime = int(time())
+#----------------20181129-------------------------------------------------------------------------------
+
 		        #msg = self.bridge.cv2_to_imgmsg(image, "bgr8")
 		        #self._pub.publish(msg)
 		cv2.imshow("listener", frame)
 		cv2.waitKey(1)
 		print("---------------Detecting Loop Ending .............................")
+
 
     def main(self):
 		rospy.spin()
