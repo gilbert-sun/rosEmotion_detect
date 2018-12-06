@@ -37,9 +37,9 @@ to specify your json path in this otherwise daily upload function will not uploa
 
 # model file download
 ```
-* Downloading model file and put "model.ckpt-60000.data-00000-of-00001" to ./model/inception/  and you can get file as right hyperLink https://www.dropbox.com/home?preview=model.ckpt-60000.data-00000-of-00001​
+* Downloading model file and put "model.ckpt-60000.data-00000-of-00001" to ./model/inception/  and you can get file as below  hyperLink 
 ```
-
+https://www.dropbox.com/home?preview=model.ckpt-60000.data-00000-of-00001​ 
 # Function Input & Output
 
 See python/main.py
