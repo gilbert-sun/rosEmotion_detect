@@ -25,14 +25,19 @@ cat result.log
 
 # Daily update
 ```
-#daily 23:02 to call client_faceType_emotion.py to upload data to amibo
+* daily 23:02 to call client_faceType_emotion.py to upload data to amibo
 crontab -e
 2 23 * * *  python  /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.py >> /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.log 2>&1
 ```
 ```
-#modify jsonPath.txt
+* modify jsonPath.txt
 to specify your json path in this otherwise daily upload function will not upload
 
+```
+
+# model file download
+```
+* Downloading model file and put "model.ckpt-60000.data-00000-of-00001" to ./model/inception/  and you can get file as right hyperLink https://www.dropbox.com/home?preview=model.ckpt-60000.data-00000-of-00001​
 ```
 
 # Function Input & Output
