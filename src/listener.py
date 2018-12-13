@@ -75,7 +75,7 @@ class RosEmotion():
 
 		self._sub = rospy.Subscriber('CVsub1', Image, self.callback, queue_size=1, buff_size = 52428800)
 
-		#self._pub = rospy.Publisher('CVpub', Image, queue_size=1)
+		self._pub = rospy.Publisher('CVpub', Image, queue_size=1)
 
 		self._pub1 = rospy.Publisher('result', String, queue_size=1)
  
@@ -153,10 +153,11 @@ class RosEmotion():
 				    self.oldTime = int(time())
 #----------------20181129-------------------------------------------------------------------------------
 
-		        #msg = self.bridge.cv2_to_imgmsg(image, "bgr8")
-		        #self._pub.publish(msg)
-		cv2.imshow("listener", frame)
-		cv2.waitKey(1)
+
+		msg = self.bridge.cv2_to_imgmsg(frame , "bgr8")
+		self._pub.publish(msg)
+		#cv2.imshow("listener", frame)
+		#	cv2.waitKey(1)
 		print("---------------Detecting Loop Ending .............................")
 
 
