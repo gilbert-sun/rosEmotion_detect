@@ -2,7 +2,6 @@ import requests, calendar, datetime,  os
 import json, codecs
 from time import time
 
-
 '''
 1).crontab -e
 54 17 * * *   /bin/sh /home/gilbert0/cronTest/repoDayActive.sh >> /home/gilbert0/cronTest/test.log 2>&1
@@ -49,14 +48,6 @@ def write_json_file(wfile ,Str):
         print("3-----json data: ----\n", json.dumps(json_data) )
 
 
-def face_RepoFormat(ans1,ans2):
-    return {"type": ans1, "confident": ans2, "detect_time":   int(time()) }
-
-    # with open(fname, 'r') as f:
-    #     data = f.read()
-    #     json_data = json.loads(data)
-    # # print("=========debug============",json.dumps(json_data))
-    # return json_data
 
 def read_json_file_DayActivity(wfile):
 
@@ -98,6 +89,13 @@ def write_json_file_DayActivity(wfile ,Str):
 def dayActivity_RepoFormat(ansSit,ansStand):
     #"%Y-%m-%d %H:%M:%S"
     return {"stand_cum_time": int(ansStand), "sit_cum_time": int(ansSit), "record_time": time.strftime("%Y-%m-%d")}
+
+def face_RepoFormat(ans1,ans2):
+    return {"type": ans1, "confident": ans2, "detect_time":   int(time()) }
+
+
+def fallPosition_RepoFormat(px,py,pz):
+    return ( {"detect_time": int(time.time()),"position": "{\"x\":"+ str(px) + ", \"y\":"+str(py)+", \"z\":"+ str(pz)+"}"} )
 
 
 def default(obj):
@@ -173,14 +171,17 @@ if __name__ == '__main__':
         user_info = client_faceType_emotion()
         res = requests.post(urlAddr+"/activity/statistic/face_type", data=json.dumps(user_info),headers=headers)
         print("\n ", sname ," : ", res)
+        faceFlag = True
     elif sname == "client_dayActivity.py":
         user_info = client_dayActivity()
         res = requests.post(urlAddr+"/activity/statistic/day_activity", data=json.dumps(user_info),headers=headers)
         print("\n ", sname," : ", res)
+        dayActFlag = True
     elif sname == "client_dayFalling.py":
         user_info = client_dayFalling()
         res = requests.post(urlAddr+"/activity/statistic/fall", data=json.dumps(user_info),headers=headers)
         print("\n ", sname," : ", res)
+        fallFlag = True
     else:
         user_info = showJson("temp1.json")
         #print ("---BBB user info----------------------\n",user_info)
