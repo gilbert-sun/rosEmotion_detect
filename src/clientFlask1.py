@@ -149,6 +149,10 @@ if __name__ == '__main__':
 
     #logo()
 
+    dayActFlag = False
+    faceFlag = False
+    fallFlag = False
+
     sname = os.path.basename(__file__)
 
     urlAddr = "https://amibo-dev.myamibo.com/api"
@@ -194,6 +198,15 @@ if __name__ == '__main__':
     print (time.strftime("%Y-%m-%d %H-%M-%S")) #.utcnow()
     print ("---dateTime----------------------\n",json.dumps(time.strftime("%Y-%m-%d %H-%M-%S"), default=default))
 
-    os.system("rm /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.json")
+    if (faceFlag):
+        os.system("rm /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.json")
+        faceFlag = False
+    if (dayActFlag):
+        os.system("rm /media/nvidia/OS_Install/pyfacV3/client_dayActivity.json")
+        dayActFlag = False
+    if (fallFlag):
+        os.system("rm /media/nvidia/OS_Install/pyfacV3/client_dayFalling.json")
+        fallFlag = False
+
     #print (datetime.datetime.now()) #.utcnow()
     #print ("---EEE----------------------\n",json.dumps(datetime.datetime.now(), default=default))
