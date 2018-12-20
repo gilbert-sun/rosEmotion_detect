@@ -1,6 +1,4 @@
-import os, pytz
 import requests, calendar, datetime,  os
-import pprint
 import json, codecs
 from time import time
 
@@ -54,11 +52,52 @@ def write_json_file(wfile ,Str):
 def face_RepoFormat(ans1,ans2):
     return {"type": ans1, "confident": ans2, "detect_time":   int(time()) }
 
-    with open(fname, 'r') as f:
+    # with open(fname, 'r') as f:
+    #     data = f.read()
+    #     json_data = json.loads(data)
+    # # print("=========debug============",json.dumps(json_data))
+    # return json_data
+
+def read_json_file_DayActivity(wfile):
+
+    if not os.path.exists(wfile):
+        f = open(wfile, 'wb')
+        json_data = json.loads( '{"device_id": "DeviceUser-Test","record_time": "2018-12-1","sit_cum_time": 0,"stand_cum_time": 0}' )
+        json.dump(json_data, codecs.getwriter('utf-8')(f), indent=4,
+                  ensure_ascii=False)
+        f.close()
+
+    with open(wfile, 'r') as f:
         data = f.read()
+
         json_data = json.loads(data)
-    # print("=========debug============",json.dumps(json_data))
+
+    #print( "1-----json data: ----",json.dumps(json_data))
     return json_data
+
+def write_json_file_DayActivity(wfile ,Str):
+
+    json_data = read_json_file_DayActivity (wfile)
+
+    with open(wfile, 'wb') as f:
+
+        json_data["record_time"]=Str["record_time"]
+
+        json_data["sit_cum_time"]=Str["sit_cum_time"]
+
+        json_data["stand_cum_time"]=Str["stand_cum_time"]
+    #(json.loads(json.dumps(Str["stand_cum_time"], indent = 4, ensure_ascii = False )))
+
+        json.dump(json_data , codecs.getwriter('utf-8')(f), indent = 4,
+               ensure_ascii = False)
+        print("3-----json data: ----\n", json.dumps(json_data) )
+
+
+
+
+def dayActivity_RepoFormat(ansSit,ansStand):
+    #"%Y-%m-%d %H:%M:%S"
+    return {"stand_cum_time": int(ansStand), "sit_cum_time": int(ansSit), "record_time": time.strftime("%Y-%m-%d")}
 
 
 def default(obj):
@@ -82,24 +121,12 @@ def default(obj):
 
 def showJson(file):
     with open(file,"r") as f:
-	data = f.read()
+        data = f.read()
         jsonData = json.loads(data)
-        return (jsonData)
+    # print("=======debug=======",json.dumps(jsondata))
+    return (jsonData)
 
-# def write_json_file(wfile ,Str):
-#     json_data = ""
-#     with open(wfile, 'r') as f:
-#         data = f.read()
-#         #print (type(data))
-#         json_data = json.loads(data)
-#         #print ("--",type(json_data))
-#         json_data["statistic_list" ].append (json.loads(Str))
-#     #print( "1-----json data: ----",json.dumps(json_data))
-#
-#     with open(wfile, 'wb') as f:
-#         json.dump(json_data , codecs.getwriter('utf-8')(f), indent = 4,
-#                ensure_ascii = False)
-#         print("3-----json data: ----\n", json.dumps(json_data) )
+
 
 def client_faceType_emotion():
     print ("\n-------client_faceType_emotion--------begin")
@@ -160,19 +187,13 @@ if __name__ == '__main__':
 
 
 
-    print ("\n")
-    print ("---BBB user info------------",user_info)
+    print ("---res.headers----------------------\n",res.headers)
+    print ("---res.content----------------------\n",res.content)
+    print()
 
-    print ("\n")
-    print ("---CCC-resp header---------------------",res.headers)
-
-    print ("\n")
-    print ("---DDD-resp content---------------------",res.content)
+    print (time.strftime("%Y-%m-%d %H-%M-%S")) #.utcnow()
+    print ("---dateTime----------------------\n",json.dumps(time.strftime("%Y-%m-%d %H-%M-%S"), default=default))
 
     os.system("rm /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.json")
-   
-
-
-
     #print (datetime.datetime.now()) #.utcnow()
     #print ("---EEE----------------------\n",json.dumps(datetime.datetime.now(), default=default))
