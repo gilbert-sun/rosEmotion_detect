@@ -23,7 +23,6 @@ class logo():
         print ("------------------------------------Step 0:End")
         print ("\n----------  Beginning: for debug   ----------")
 
-
 def write_json_file(wfile ,Str):
     json_data = ""
 
@@ -46,8 +45,6 @@ def write_json_file(wfile ,Str):
         json.dump(json_data , codecs.getwriter('utf-8')(f), indent = 4,
                ensure_ascii = False)
         print("3-----json data: ----\n", json.dumps(json_data) )
-
-
 
 def read_json_file_DayActivity(wfile):
 
@@ -83,9 +80,6 @@ def write_json_file_DayActivity(wfile ,Str):
                ensure_ascii = False)
         print("3-----json data: ----\n", json.dumps(json_data) )
 
-
-
-
 def dayActivity_RepoFormat(ansSit,ansStand):
     #"%Y-%m-%d %H:%M:%S"
     return {"stand_cum_time": int(ansStand), "sit_cum_time": int(ansSit), "record_time": time.strftime("%Y-%m-%d")}
@@ -93,10 +87,8 @@ def dayActivity_RepoFormat(ansSit,ansStand):
 def face_RepoFormat(ans1,ans2):
     return {"type": ans1, "confident": ans2, "detect_time":   int(time()) }
 
-
 def fallPosition_RepoFormat(px,py,pz):
     return ( {"detect_time": int(time.time()),"position": "{\"x\":"+ str(px) + ", \"y\":"+str(py)+", \"z\":"+ str(pz)+"}"} )
-
 
 def default(obj):
     """Default JSON serializer."""
@@ -124,24 +116,26 @@ def showJson(file):
     # print("=======debug=======",json.dumps(jsondata))
     return (jsonData)
 
-
-
-def client_faceType_emotion():
-    print ("\n-------client_faceType_emotion--------begin")
-    pathName =""
-    with open("jsonPath.txt","r") as f:
-		pathName = f.readlines()
-    return showJson(pathName + "client_faceType_emotion.json")
-
-
-
 def client_dayActivity():
     print ("\n-------client_dayActivity--------begin")
-    return showJson("client_dayActivity.json")
+    with open("jsonPath.txt","r") as f:
+        pathName = f.readlines()
+        print (pathName)
+    return showJson(pathName +"client_dayActivity.json")
 
 def client_dayFalling():
     print ("\n-------client_dayFalling--------begin")
-    return showJson("client_dayFalling.json")
+    with open("jsonPath.txt","r") as f:
+        pathName = f.readlines()
+        print (pathName)
+    return showJson(pathName +"client_fall.json")
+
+def client_faceType_emotion():
+    print ("\n-------client_faceType_emotion--------begin")
+    with open("jsonPath.txt","r") as f:
+        pathName = f.readlines()
+        print (pathName)
+    return showJson(pathName +"client_faceType_emotion.json")
 
 if __name__ == '__main__':
 

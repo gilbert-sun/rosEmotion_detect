@@ -83,19 +83,24 @@ def showJson(fname='temp1.json'):
 
 def client_dayActivity():
     print ("\n-------client_dayActivity--------begin")
-    return showJson("client_dayActivity.json")
+    with open("jsonPath.txt","r") as f:
+        pathName = f.readlines()
+        print (pathName)
+    return showJson(pathName +"client_dayActivity.json")
 
 def client_dayFalling():
     print ("\n-------client_dayFalling--------begin")
-    return showJson("temp21.json")
+    with open("jsonPath.txt","r") as f:
+        pathName = f.readlines()
+        print (pathName)
+    return showJson(pathName +"client_fall.json")
 
 def client_faceType_emotion():
     print ("\n-------client_faceType_emotion--------begin")
-
-    return showJson("client_faceType_emotion.json")
-
-
-
+    with open("jsonPath.txt","r") as f:
+        pathName = f.readlines()
+        print (pathName)
+    return showJson(pathName +"client_faceType_emotion.json")
 
 if __name__ == '__main__':
     #
@@ -105,23 +110,6 @@ if __name__ == '__main__':
     # json_data["stand_cum_time"] += 1
     #
     # print(write_json_file_DayActivity("client_dayActivity.json", dayActivity_RepoFormat(json_data["sit_cum_time"] , json_data["stand_cum_time"])))
-    write_json_file('temp21.json', fallPosition_RepoFormat(4,12,33))
-    urlAddr = "https://amibo-dev.myamibo.com/api"
 
-
-    print("---AAA----------------------\n")
-
-    headers = {'content-type': 'application/json','x-api-key':'pdBlWY6qJ81fZnOzBJIwW60XHv1Fd2Ai7ePPxSDg'}
-    res = ""
-
-    user_info = client_dayFalling()
-    res = requests.post(urlAddr + "/activity/statistic/fall", data=json.dumps(user_info), headers=headers)
-    # user_info = client_faceType_emotion()
-    # res = requests.post(urlAddr + "/activity/statistic/face_type", data=json.dumps(user_info), headers=headers)
-
-    print ("---res.headers----------------------\n",res.headers)
-    print ("---res.content----------------------\n",res.content)
-    print()
-
-    print (time.strftime("%Y-%m-%d %H-%M-%S")) #.utcnow()
+    os.getcwd()
 
