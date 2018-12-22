@@ -2,6 +2,10 @@ import requests, calendar, datetime,  os
 import json, codecs
 from time import time
 
+from darknet_ros_msgs.msg import BoundingBoxes
+import time
+
+
 '''
 1).crontab -e
 54 17 * * *   /bin/sh /home/gilbert0/cronTest/repoDayActive.sh >> /home/gilbert0/cronTest/test.log 2>&1
@@ -177,9 +181,9 @@ if __name__ == '__main__':
         print("\n ", sname," : ", res)
         fallFlag = True
     else:
-        user_info = showJson("temp1.json")
+        user_info = showJson("client_faceType_emotion.json")
         #print ("---BBB user info----------------------\n",user_info)
-        res = requests.post(urlAddr+"/activity/statistic/fall", data=json.dumps(user_info),headers=headers)
+        res = requests.post(urlAddr+"/activity/statistic/face_type", data=json.dumps(user_info),headers=headers)
         print ("\nNothing to fit")
         print("\n ",sname," : ", res)
 
@@ -189,9 +193,8 @@ if __name__ == '__main__':
     print ("---res.headers----------------------\n",res.headers)
     print ("---res.content----------------------\n",res.content)
     print()
-
     print (time.strftime("%Y-%m-%d %H-%M-%S")) #.utcnow()
-    print ("---dateTime----------------------\n",json.dumps(time.strftime("%Y-%m-%d %H-%M-%S"), default=default))
+
 
     if (faceFlag):
         os.system("rm /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.json")
