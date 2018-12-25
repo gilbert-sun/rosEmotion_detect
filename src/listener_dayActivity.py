@@ -80,5 +80,5 @@ if __name__ == '__main__':
             listener()
             rospy.spin()
 	except rospy.ROSInterruptException:
-			rospy.loginfo("Day activity tracking terminated by user")
+            rospy.loginfo("Day activity tracking terminated by user")
 
