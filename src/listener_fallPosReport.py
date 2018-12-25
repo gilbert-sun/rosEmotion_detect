@@ -25,7 +25,8 @@ def callback(msg):
 
     json_data = read_json_file_DayActivity( "client_dayActivity.json")
 
-# ['seq:', '11897', 'stamp:', 'secs:', '1545287058', 'nsecs:', '815070391', 'frame_id:', '"detection"']​
+# 0	  1		2	3	4		5	6		7	8
+#'seq:', '11897', 'stamp:', 'secs:', '1545287058', 'nsecs:', '815070391', 'frame_id:', '"detection"'
     headerTime = str(msg.header).split()[4]
 
     if(boxMsg[1] == "sitting"):
@@ -34,7 +35,6 @@ def callback(msg):
             json_data["stand_cum_time"] += 1
     write_json_file_DayActivity("client_dayActivity.json",dayActivity_RepoFormat(json_data["sit_cum_time"], json_data["stand_cum_time"]))
 
-    #print(write_json_file_DayActivity("client_dayActivity.json", dayActivity_RepoFormat(json_data["sit_cum_time"] , json_data["stand_cum_time"])))
 
     #rospy.loginfo(msg.bounding_boxes.xmin,msg.bounding_boxes.ymin,msg.bounding_boxes.xmax,msg.bounding_boxes.ymax)
 

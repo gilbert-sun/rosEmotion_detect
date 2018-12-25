@@ -29,9 +29,12 @@ cat result.log
 crontab -e
 2 23 * * *  python  /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.py >> /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.log 2>&1
 ```
-```
-* modify jsonPath.txt
+
+* modify jsonPath.txt & restart crontab
 to specify your json path in this otherwise daily upload function will not upload
+```
+root@tegra-ubuntu:/media/nvidia/OS_Install/temp1/rosEmotion_detect/src# crontab -e
+root@tegra-ubuntu:/media/nvidia/OS_Install/temp1/rosEmotion_detect/src# /etc/init.d/cron -restart
 
 ```
 

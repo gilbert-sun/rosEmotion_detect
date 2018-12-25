@@ -1,2 +1,1 @@
-/temp/rosEmotion_detect/src
-
+/media/nvidia/OS_Install/temp1/rosEmotion_detect/src/

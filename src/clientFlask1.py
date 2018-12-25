@@ -4,7 +4,7 @@ from time import time
 
 from darknet_ros_msgs.msg import BoundingBoxes
 import time
-
+import rospy
 
 '''
 1).crontab -e
@@ -82,7 +82,7 @@ def write_json_file_DayActivity(wfile ,Str):
 
         json.dump(json_data , codecs.getwriter('utf-8')(f), indent = 4,
                ensure_ascii = False)
-        print("3-----json data: ----\n", json.dumps(json_data) )
+
 
 def dayActivity_RepoFormat(ansSit,ansStand):
     #"%Y-%m-%d %H:%M:%S"
