@@ -5,7 +5,9 @@ import json, codecs
 
 from darknet_ros_msgs.msg import BoundingBoxes
 import time
-from clientFlask1 import write_json_file_DayActivity, read_json_file_DayActivity,dayActivity_RepoFormat
+#as below open project not using pycharm from "from src.clientFlask1" instead of "from clientFlask1"
+from src.clientFlask1 import write_json_file_DayActivity, read_json_file_DayActivity,dayActivity_RepoFormat
+#from clientFlask1 import write_json_file_DayActivity, read_json_file_DayActivity,dayActivity_RepoFormat
 
 
 

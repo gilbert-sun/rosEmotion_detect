@@ -23,7 +23,35 @@ python python/main.py
 cat result.log
 ```
 
-# Daily update
+# Http Server --> Local Server
+```
+http://127.0.0.1:5000/
+```
+![MVC](pic/mvc.png)
+# Http client request --> Amibo Server
+```
+example1  : falling report call --> clientFlask1.py
+
+requests.post(urlAddr+"/activity/statistic/fall", data=json.dumps(user_info),headers=headers)
+```
+![DayActive](pic/dayFallDetect.png)
+
+```
+example1  : day Activity call --> clientFlask1.py
+
+requests.post(urlAddr+"/activity/statistic/day_activity", data=json.dumps(user_info),headers=headers)
+```
+![DayActive](pic/dayActivity2018rosTx2.png)
+
+```
+example1  : face emotion call --> clientFlask1.py
+
+requests.post(urlAddr+"/activity/statistic/face_type", data=json.dumps(user_info),headers=headers)
+```
+![faceReport](pic/faceReport2018Tx2.png)
+
+
+# Crontab --> Daily update
 ```
 * daily 23:02 to call client_faceType_emotion.py to upload data to amibo
 crontab -e
