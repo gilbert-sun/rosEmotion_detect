@@ -132,7 +132,7 @@ def client_dayFalling():
     with open("jsonPath.txt","r") as f:
         pathName = f.readlines()
         print (pathName)
-    return showJson(pathName +"client_fall.json")
+    return showJson(pathName +"client_dayFalling.json")
 
 def client_faceType_emotion():
     print ("\n-------client_faceType_emotion--------begin")
