@@ -1,0 +1,25 @@
+{
+    "device_id": "DeviceUser-Test",
+    "statistic_list": [
+        {
+            "type": 1,
+            "confident": 55,
+            "detect_time": 1533214800
+        },
+        {
+            "type": 2,
+            "confident": 98,
+            "detect_time": 1543465178
+        },
+        {
+            "type": 1,
+            "confident": 39,
+            "detect_time": 1543465179
+        },
+        {
+            "type": 4,
+            "confident": 30,
+            "detect_time": 1543465180
+        }
+    ]
+}
