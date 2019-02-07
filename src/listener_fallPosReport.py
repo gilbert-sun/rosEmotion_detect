@@ -2,7 +2,7 @@ import rospy
 from darknet_ros_msgs.msg import BoundingBoxes
 import time
 #as below open project not using pycharm from "from src.clientFlask1" instead of "from clientFlask1"
-from src.clientFlask1 import read_json_file_DayActivity, write_json_file,fallPosition_RepoFormat
+from clientFlask1 import read_json_file_DayActivity, write_json_file,fallPosition_RepoFormat
 
 
 
@@ -31,9 +31,11 @@ def callback(msg):
 #'seq:', '11897', 'stamp:', 'secs:', '1545287058', 'nsecs:', '815070391', 'frame_id:', '"detection"'
     headerTime = str(msg.header).split()[4]
 
-    if(boxMsg[1] == "falling"):
+    if(boxMsg[1] == '"falling"'):
         write_json_file('client_dayFalling.json', fallPosition_RepoFormat(0,0,0))
-
+        print ("\n ------[%s]-----1------------if \n",boxMsg[1])
+    else:
+        print ("\n ------[%s]-----2------------if \n",boxMsg[1])
 
     #rospy.loginfo(msg.bounding_boxes.xmin,msg.bounding_boxes.ymin,msg.bounding_boxes.xmax,msg.bounding_boxes.ymax)
 

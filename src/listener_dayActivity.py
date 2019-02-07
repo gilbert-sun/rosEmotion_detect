@@ -3,7 +3,7 @@ from darknet_ros_msgs.msg import BoundingBoxes
 import time
 
 #as below open project not using pycharm from "from src.clientFlask1" instead of "from clientFlask1"
-from src.clientFlask1 import write_json_file_DayActivity, read_json_file_DayActivity,dayActivity_RepoFormat
+from clientFlask1 import write_json_file_DayActivity, read_json_file_DayActivity,dayActivity_RepoFormat
 
 global headerTimeOld
 
@@ -48,7 +48,7 @@ def callback(msg):
             json_data["sit_cum_time"] += 1
 	    #print ("\n ------[%s]-----------------if \n",boxMsg[1])
 	    write_json_file_DayActivity("client_dayActivity.json",dayActivity_RepoFormat(json_data["sit_cum_time"], json_data["stand_cum_time"]))
-    elif(boxMsg[1] == "standing"):
+    elif(boxMsg[1] == '"standing"'):
             json_data["stand_cum_time"] += 1
             write_json_file_DayActivity("client_dayActivity.json",dayActivity_RepoFormat(json_data["sit_cum_time"], json_data["stand_cum_time"]))
     else:

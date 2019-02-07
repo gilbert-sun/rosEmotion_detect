@@ -3,7 +3,7 @@ import requests, calendar, datetime,  os
 import pprint
 import json, codecs
 from time import time
-import time
+
 
 '''
 1).crontab -e
@@ -52,22 +52,6 @@ def write_json_file(wfile ,Str):
 
 
 
-def read_json_file_DayActivity(wfile):
-
-    if not os.path.exists(wfile):
-        f = open(wfile, 'wb')
-        json_data = json.loads( '{"device_id": "DeviceUser-Test","record_time": "2018-12-1","sit_cum_time": 0,"stand_cum_time": 0}' )
-        json.dump(json_data, codecs.getwriter('utf-8')(f), indent=4,
-                  ensure_ascii=False)
-        f.close()
-
-    with open(wfile, 'r') as f:
-        data = f.read()
-
-        json_data = json.loads(data)
-
-    #print( "1-----json data: ----",json.dumps(json_data))
-    return json_data
 
 def write_json_file_DayActivity(wfile ,Str):
 
@@ -141,31 +125,21 @@ def client_faceType_emotion():
     pathName = os.getcwd()
 
     print ("\n-------client_faceType_emotion--------begin", pathName)
-    return showJson(pathName + "/client_faceType_emotion.json")
+    return showJson(pathName + "client_faceType_emotion.json")
 
 
 
-def client_dayActivity(): 
-    pathName = os.getcwd()
+def client_dayActivity():
+    print ("\n-------client_dayActivity--------begin")
+    return showJson("client_dayActivity.json")
 
-    print ("\n-------client_dayActivity--------begin", pathName)
-
-    return showJson(pathName +"/client_dayActivity.json")
-
-def client_dayFalling(): 
-    pathName = os.getcwd()
-
-    print ("\n-------client_dayFalling--------begin", pathName)
-
-    return showJson(pathName +"/client_dayFalling.json")
+def client_dayFalling():
+    print ("\n-------client_dayFalling--------begin")
+    return showJson("client_dayFalling.json")
 
 if __name__ == '__main__':
 
     #logo()
-
-    dayActFlag = False
-    faceFlag = False
-    fallFlag = False
 
     sname = os.path.basename(__file__)
 
@@ -187,21 +161,18 @@ if __name__ == '__main__':
         user_info = client_faceType_emotion()
         res = requests.post(urlAddr+"/activity/statistic/face_type", data=json.dumps(user_info),headers=headers)
         print("\n ", sname ," : ", res)
-        faceFlag = True
     elif sname == "client_dayActivity.py":
         user_info = client_dayActivity()
         res = requests.post(urlAddr+"/activity/statistic/day_activity", data=json.dumps(user_info),headers=headers)
         print("\n ", sname," : ", res)
-        dayActFlag = True
     elif sname == "client_dayFalling.py":
         user_info = client_dayFalling()
         res = requests.post(urlAddr+"/activity/statistic/fall", data=json.dumps(user_info),headers=headers)
         print("\n ", sname," : ", res)
-        fallFlag = True
     else:
-        user_info = showJson("client_faceType_emotion.json")
+        user_info = showJson("temp1.json")
         #print ("---BBB user info----------------------\n",user_info)
-        res = requests.post(urlAddr+"/activity/statistic/face_type", data=json.dumps(user_info),headers=headers)
+        res = requests.post(urlAddr+"/activity/statistic/fall", data=json.dumps(user_info),headers=headers)
         print ("\nNothing to fit")
         print("\n ",sname," : ", res)
 
@@ -214,15 +185,12 @@ if __name__ == '__main__':
     print (time.strftime("%Y-%m-%d %H-%M-%S")) #.utcnow()
 
 
-    if (faceFlag):
-        os.system("rm ./client_faceType_emotion.json")
-        faceFlag = False
-    if (dayActFlag):
-        os.system("rm ./client_dayActivity.json")
-        dayActFlag = False
-    if (fallFlag):
-        os.system("rm ./client_dayFalling.json")
-        fallFlag = False
+
+
+    os.system("rm /media/nvidia/OS_Install/pyfacV3/client_faceType_emotion.json")
+   
+
+
 
     #print (datetime.datetime.now()) #.utcnow()
     #print ("---EEE----------------------\n",json.dumps(datetime.datetime.now(), default=default))
