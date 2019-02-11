@@ -91,7 +91,7 @@ def dayActivity_RepoFormat(ansSit,ansStand):
     return {"stand_cum_time": int(ansStand), "sit_cum_time": int(ansSit), "record_time": time.strftime("%Y-%m-%d")}
 
 def face_RepoFormat(ans1,ans2):
-    return {"type": ans1, "confident": ans2, "detect_time":   int(time()) }
+    return {"type": ans1, "confident": ans2, "detect_time":   int(time.time()) }
 
 def fallPosition_RepoFormat(px,py,pz):
     return ( {"detect_time": int(time.time()),"position": "{\"x\":"+ str(px) + ", \"y\":"+str(py)+", \"z\":"+ str(pz)+"}"} )
